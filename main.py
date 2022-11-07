@@ -1,6 +1,8 @@
 import game
 import multiprocessing as mp
 import time
+import threading
+import sys
 
 if __name__ == "__main__":
     # Create game instance
@@ -9,14 +11,12 @@ if __name__ == "__main__":
 
     secs = game._secs
     
-    p = mp.Process(target=game.run)
-    p.start()
+    game.start()
 
     time.sleep(secs)
 
-    p.terminate()
+    game.raise_exception()
 
-    p.join()
+    print("\nYour score was: " + str(game.get_score()))
 
-    print("Your score was: " + str(game.get_score()))
-
+    sys.exit("End of Game!")
